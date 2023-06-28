@@ -8,6 +8,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { register } from './controllers/auth.js';
 
 //Middlewares
 
@@ -36,6 +37,9 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
+
+//File Routes
+app.post('/auth/register', upload.single('picture'), register);
 
 //DATABASE
 const PORT = process.env.PORT || 5001;
